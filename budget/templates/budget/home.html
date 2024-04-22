@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Home</h1>
+    <ul>
+        <li><a href="{% url 'wallet_list' %}">Wallet List</a></li>
+        <li><a href="{% url 'expenses_list' %}">Expenses List</a></li>
+        <li><a href="{% url 'revenues_list' %}">Revenues List</a></li>
+        <li><a href="{% url 'category_list' %}">Category List</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+</body>
+</html>

@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('', views.home, name='home'),
     # Widoki dla modelu Wallet
     path('wallet/', views.WalletListView.as_view(), name='wallet_list'),
     path('wallet/create/', views.WalletCreateView.as_view(), name='wallet_create'),
