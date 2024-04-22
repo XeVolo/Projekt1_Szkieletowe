@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'budget/home.html')
 
 def register(request):
     if request.method == 'POST':
@@ -38,86 +38,86 @@ def user_logout(request):
 
 class WalletListView(ListView):
     model = Wallet
-    template_name = 'wallet_list.html'
+    template_name = 'budget/wallet_list.html'
 
 class WalletCreateView(CreateView):
     model = Wallet
     fields = ['balance', 'description']
     success_url = reverse_lazy('wallet_list')
-    template_name = 'wallet_form.html'
+    template_name = 'budget/wallet_form.html'
 
 class WalletUpdateView(UpdateView):
     model = Wallet
     fields = ['balance', 'description']
     success_url = reverse_lazy('wallet_list')
-    template_name = 'wallet_form.html'
+    template_name = 'budget/wallet_form.html'
 
 class WalletDeleteView(DeleteView):
     model = Wallet
     success_url = reverse_lazy('wallet_list')
-    template_name = 'wallet_confirm_delete.html'
+    template_name = 'budget/wallet_confirm_delete.html'
 
 
 class ExpenseListView(ListView):
     model = Expense
-    template_name = 'expense_list.html'
+    template_name = 'budget/expense_list.html'
 
 class ExpenseCreateView(CreateView):
     model = Expense
     fields = ['user', 'wallet', 'title', 'operation_date', 'amount', 'category', 'description']
     success_url = reverse_lazy('expenses_list')
-    template_name = 'expense_form.html'
+    template_name = 'budget/expense_form.html'
 
 class ExpenseUpdateView(UpdateView):
     model = Expense
     fields = ['user', 'wallet', 'title', 'operation_date', 'amount', 'category', 'description']
     success_url = reverse_lazy('expense_list')
-    template_name = 'expense_form.html'
+    template_name = 'budget/expense_form.html'
 
 class ExpenseDeleteView(DeleteView):
     model = Expense
     success_url = reverse_lazy('expense_list')
-    template_name = 'expense_confirm_delete.html'
+    template_name = 'budget/expense_confirm_delete.html'
 
 
 class RevenueListView(ListView):
     model = Revenue
-    template_name = 'revenue_list.html'
+    template_name = 'budget/revenue_list.html'
 
 class RevenueCreateView(CreateView):
     model = Revenue
     fields = ['user', 'wallet', 'title', 'operation_date', 'amount', 'category', 'description']
     success_url = reverse_lazy('revenue_list')
-    template_name = 'revenue_form.html'
+    template_name = 'budget/revenue_form.html'
 
 class RevenueUpdateView(UpdateView):
     model = Revenue
     fields = ['user', 'wallet', 'title', 'operation_date', 'amount', 'category', 'description']
     success_url = reverse_lazy('revenues_list')
-    template_name = 'revenue_form.html'
+    template_name = 'budget/revenue_form.html'
 
 class RevenueDeleteView(DeleteView):
     model = Revenue
     success_url = reverse_lazy('revenue_list')
-    template_name = 'revenue_confirm_delete.html'
+    template_name = 'budget/revenue_confirm_delete.html'
 
 class CategoryListView(ListView):
     model = Category
-    template_name = 'category_list.html'
+    template_name = 'budget/category_list.html'
 
 class CategoryCreateView(CreateView):
     model = Category
     fields = ['name']
     success_url = reverse_lazy('category_list')
-    template_name = 'category_form.html'
+    template_name = 'budget/category_form.html'
 
 class CategoryUpdateView(UpdateView):
     model = Category
     fields = ['name']
     success_url = reverse_lazy('category_list')
-    template_name = 'category_form.html'
+    template_name = 'budget/category_form.html'
 
 class CategoryDeleteView(DeleteView):
     model = Category
     success_url = reverse_lazy('category_list')
-    template_name = 'category_confirm_delete.html'
+    template_name = 'budget/category_confirm_delete.html'
