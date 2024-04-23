@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/homestyle.css' %}">
+    <title>Your Wallet</title>
 </head>
 <body>
-    <h1>Home</h1>
-    <ul>
+    <h1>Your Wallet</h1>
+    <nav>
+        <ul>
         <li><a href="{% url 'wallet_list' %}">Wallet List</a></li>
         <li><a href="{% url 'expenses_list' %}">Expenses List</a></li>
         <li><a href="{% url 'revenues_list' %}">Revenues List</a></li>
@@ -19,6 +22,10 @@
         <li><a href="{% url 'register' %}">Register</a></li>
         <li><a href="{% url 'login' %}">Login</a></li>
         <li><a href="{% url 'logout' %}">Logout</a></li>
-    </ul>
+        </ul>
+    </nav>
+    <footer>
+        <p>Your Wallet Inc.</p>
+    </footer>
 </body>
 </html>

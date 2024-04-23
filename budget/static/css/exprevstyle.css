@@ -1,0 +1,82 @@
+body {
+    background-color: #1a1a1a; /* ciemne tło */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+h1 {
+    text-align: center;
+    color: #fff; /* kolor tekstu */
+    padding: 20px 0; /* wewnętrzny odstęp w nagłówku */
+}
+
+form {
+    margin: 0 auto; /* wyśrodkowanie formularza */
+    max-width: 600px; /* maksymalna szerokość formularza */
+    padding: 20px; /* wewnętrzny odstęp formularza */
+    background-color: #333; /* kolor tła formularza */
+    border-radius: 5px; /* zaokrąglenie rogów formularza */
+}
+form select {
+    width: calc(100% - 24px); /* Szerokość listy wyboru */
+    padding: 10px; /* Wewnętrzny odstęp */
+    margin: 5px 0; /* Marginesy */
+    border: none; /* Brak obramowania */
+    background-color: #fff; /* Kolor tła */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+}
+
+/* Ustawiamy wszystkie listy wyboru w jednej linii */
+form select {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+form input[type="text"],
+form input[type="number"],
+form textarea,
+form select {
+    width: calc(100% - 24px); /* Szerokość */
+    padding: 10px; /* Wewnętrzny odstęp */
+    margin: 5px 0; /* Marginesy */
+    border: none; /* Brak obramowania */
+    background-color: #bbb; /* Kolor tła - lekko jaśniejszy niż tło */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+}
+
+/* Ustawiamy kolor tekstu dla pól do wpisywania i list wyboru */
+
+
+form textarea {
+    height: 150px; /* wysokość pola tekstowego */
+}
+
+form button[type="submit"] {
+    display: block; /* przycisk jako blokowy */
+    width: 100%; /* szerokość przycisku */
+    padding: 10px; /* wewnętrzny odstęp przycisku */
+    margin-top: 10px; /* margines odstępu przycisku od góry */
+    border: none; /* brak obramowania przycisku */
+    background-color: #4CAF50; /* kolor tła przycisku */
+    color: #fff; /* kolor tekstu przycisku */
+    border-radius: 5px; /* zaokrąglenie rogów przycisku */
+    cursor: pointer; /* zmiana kursora po najechaniu na przycisk */
+    transition: background-color 0.3s ease; /* płynna zmiana koloru tła przycisku */
+}
+
+form button[type="submit"]:hover {
+    background-color: #45a049; /* zmiana koloru tła przycisku po najechaniu */
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+}
