@@ -6,9 +6,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 
+def welcome(request):
+    return render(request, 'registration/welcomepage.html')
 def home(request):
     return render(request, 'budget/home.html')
-
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -19,7 +20,6 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
-
 def user_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
@@ -33,7 +33,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('home')  # Przekierowanie po wylogowaniu
+    return redirect('welcome')  # Przekierowanie po wylogowaniu
 
 
 class WalletListView(ListView):

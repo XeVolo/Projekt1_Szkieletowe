@@ -9,6 +9,7 @@
 </head>
 <body>
     <h1>Your Wallet</h1>
+    <p id="user-info">Logged in as: {{ request.user.username }} (<a href="{% url 'logout' %}">Logout</a>)</p>
     <nav>
         <ul>
         <li><a href="{% url 'wallet_list' %}">Wallet List</a></li>
@@ -19,9 +20,6 @@
         <li><a href="{% url 'expenses_create' %}">Create Expense</a></li>
         <li><a href="{% url 'revenues_create' %}">Create Revenue</a></li>
         <li><a href="{% url 'category_create' %}">Create Category</a></li>
-        <li><a href="{% url 'register' %}">Register</a></li>
-        <li><a href="{% url 'login' %}">Login</a></li>
-        <li><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
     </nav>
     <footer>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/welcomepagestyle.css' %}">
+    <title>Your Wallet</title>
+</head>
+<body>
+    <header>
+        <h1>Your Wallet</h1>
+    </header>
+    <div>
+        <p>
+            Welcome in our page! <br/>
+            Log in to your wallet or Register if you don't have account yet!
+        </p>
+        <nav>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+        </nav>
+    </div>
+<footer>
+    <p>Your Wallet Inc.</p>
+</footer>
+
+</body>
+</html>
