@@ -5,6 +5,10 @@ from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
+from .forms import ExpenseForm
 
 def home(request):
     return render(request, 'budget/home.html')
@@ -40,12 +44,16 @@ class WalletListView(ListView):
     model = Wallet
     template_name = 'budget/wallet_list.html'
 
-class WalletCreateView(CreateView):
+class WalletCreateView(LoginRequiredMixin, CreateView):
     model = Wallet
     fields = ['balance', 'description']
     success_url = reverse_lazy('wallet_list')
     template_name = 'budget/wallet_form.html'
 
+    def form_valid(self, form):
+        self.object = form.save()  # Save the form to get the object with an ID
+        self.object.users.add(self.request.user)  # Add the user
+        return HttpResponseRedirect(self.get_success_url())
 class WalletUpdateView(UpdateView):
     model = Wallet
     fields = ['balance', 'description']
@@ -62,11 +70,20 @@ class ExpenseListView(ListView):
     model = Expense
     template_name = 'budget/expense_list.html'
 
-class ExpenseCreateView(CreateView):
+class ExpenseCreateView(LoginRequiredMixin, CreateView):
     model = Expense
-    fields = ['user', 'wallet', 'title', 'operation_date', 'amount', 'category', 'description']
+    form_class = ExpenseForm
     success_url = reverse_lazy('expenses_list')
     template_name = 'budget/expense_form.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
 
 class ExpenseUpdateView(UpdateView):
     model = Expense

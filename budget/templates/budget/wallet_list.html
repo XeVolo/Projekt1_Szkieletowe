@@ -10,8 +10,10 @@
 <body>
     <h1>Wallet List</h1>
     <ul>
-        {% for wallet in object_list %}
+        {% for wallet in user.wallets.all %}
             <li>{{ wallet.description }} - Balance: {{ wallet.balance }}</li>
+        {% empty %}
+            <li>No wallets found for this user</li>
         {% endfor %}
     </ul>
 </body>
