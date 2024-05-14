@@ -38,7 +38,7 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home')  # Przekierowanie po zalogowaniu
+            return redirect('home')
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
