@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/walletdetailsstyle.css' %}">
+    <title>Wallet</title>
+</head>
+<body>
+  <h1>Wallet Details</h1>
+    <p>
+        Name: {{ wallet.description }} </br>
+        Balance: {{wallet.balance}}
+    </p>
+
+    <h2>Revenues:</h2>
+    <ul>
+    {% for revenue in revenues %}
+        <li>{{ revenue.amount }} {{ revenue.title }}</li>
+    {% endfor %}
+    </ul>
+
+    <h2>Expenses:</h2>
+    <ul>
+    {% for expense in expenses %}
+        <li>{{ expense.amount }} {{ expense.title }}</li>
+    {% endfor %}
+    </ul>
+</body>
+<footer>
+        Your Wallet Inc.
+</footer>
+</html>

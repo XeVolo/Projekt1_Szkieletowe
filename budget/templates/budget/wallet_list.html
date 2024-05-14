@@ -11,7 +11,7 @@
     <h1>Wallet List</h1>
     <ul>
         {% for wallet in user.wallets.all %}
-            <li>{{ wallet.description }} - Balance: {{ wallet.balance }}</li>
+            <li><a href="{% url 'wallet_details' wallet.id %}" class="wallet-button">{{ wallet.description }} - Balance: {{ wallet.balance }}</a></li>
         {% empty %}
             <li>No wallets found for this user</li>
         {% endfor %}
