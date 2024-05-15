@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from .models import Wallet, Expense, Revenue, Category
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
@@ -48,7 +48,21 @@ def user_logout(request):
     logout(request)
     return redirect('welcome')  # Przekierowanie po wylogowaniu
 
+class WalletDetailsView(DetailView):
+    model = Wallet
+    template_name = 'wallet_details.html'
+    context_object_name = 'wallet'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        wallet = self.get_object()
+
+        revenues = Revenue.objects.filter(wallet=wallet)
+        expenses = Expense.objects.filter(wallet=wallet)
+
+        context['revenues'] = revenues
+        context['expenses'] = expenses
+        return context
 class WalletListView(ListView):
     model = Wallet
     template_name = 'budget/wallet_list.html'
