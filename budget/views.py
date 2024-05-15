@@ -135,7 +135,7 @@ class RevenueListView(ListView):
 class RevenueCreateView(LoginRequiredMixin, CreateView):
     model = Revenue
     form_class = RevenueForm
-    success_url = reverse_lazy('revenue_list')
+    success_url = reverse_lazy('revenues_list')
     template_name = 'budget/revenue_form.html'
 
     def form_valid(self, form):

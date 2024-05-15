@@ -3,6 +3,7 @@ from .models import Expense, Category, Revenue
 
 
 class ExpenseForm(forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None, to_field_name="name")
 
     class Meta:
         model = Expense
@@ -16,8 +17,6 @@ class ExpenseForm(forms.ModelForm):
             self.fields['wallet'].empty_label = None
             self.fields['wallet'].label_from_instance = lambda obj: obj.description
 
-            self.fields['category'].widget = forms.Select(
-                choices=[(category.name, category.name) for category in Category.objects.all()])
 
     def save(self, commit=True):
         instance = super().save(commit=False)
@@ -32,6 +31,7 @@ class ExpenseForm(forms.ModelForm):
 
 
 class RevenueForm(forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None, to_field_name="name")
 
     class Meta:
         model = Revenue
@@ -44,8 +44,6 @@ class RevenueForm(forms.ModelForm):
             self.fields['wallet'].queryset = user.wallets.all()
             self.fields['wallet'].empty_label = None
             self.fields['wallet'].label_from_instance = lambda obj: obj.description
-            self.fields['category'].widget = forms.Select(
-                choices=[(category.name, category.name) for category in Category.objects.all()])
 
     def save(self, commit=True):
         instance = super().save(commit=False)
