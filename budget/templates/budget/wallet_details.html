@@ -27,6 +27,15 @@
         <li>{{ expense.amount }} {{ expense.title }}</li>
     {% endfor %}
     </ul>
+
+      <h2>Summary:</h2>
+        <p style="margin-bottom: 20px">Total Revenue: {{ total_revenue }}</p>
+        <p>Total Expense: {{ total_expense }}</p>
+
+    <h2>Revenue and Expense Chart:</h2>
+    <div style="text-align: center;">
+    <img src="{% url 'wallet_chart' pk=wallet.id %}" alt="Chart" width="33%" height="33%">
+</div>
 </body>
 <footer>
         Your Wallet Inc.

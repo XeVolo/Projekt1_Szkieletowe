@@ -8,6 +8,7 @@ urlpatterns = [
     # Widoki dla modelu Wallet
     path('wallet/', views.WalletListView.as_view(), name='wallet_list'),
     path('wallet/<int:pk>/', views.WalletDetailsView.as_view(), name='wallet_details'),
+    path('wallet/<int:pk>/chart', views.wallet_chart, name='wallet_chart'),
     path('wallet/create/', views.WalletCreateView.as_view(), name='wallet_create'),
     path('wallet/<int:pk>/update/', views.WalletUpdateView.as_view(), name='wallet_update'),
     path('wallet/<int:pk>/delete/', views.WalletDeleteView.as_view(), name='wallet_delete'),

@@ -6,12 +6,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from .forms import ExpenseForm
 from .forms import RevenueForm
-
-
+import matplotlib.pyplot as plt
+import io, os
 def welcome(request):
     return render(request, 'registration/welcomepage.html')
 
@@ -26,7 +26,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')  # Przekierowanie po rejestracji
+            return redirect('home')
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
@@ -46,7 +46,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('welcome')  # Przekierowanie po wylogowaniu
+    return redirect('welcome')
 
 class WalletDetailsView(DetailView):
     model = Wallet
@@ -60,9 +60,39 @@ class WalletDetailsView(DetailView):
         revenues = Revenue.objects.filter(wallet=wallet)
         expenses = Expense.objects.filter(wallet=wallet)
 
+        total_revenue = sum(revenue.amount for revenue in revenues)
+        total_expense = sum(expense.amount for expense in expenses)
+
         context['revenues'] = revenues
         context['expenses'] = expenses
+        context['total_revenue'] = total_revenue
+        context['total_expense'] = total_expense
         return context
+def wallet_chart(request, pk):
+    wallet = Wallet.objects.get(pk=pk)
+    revenues = Revenue.objects.filter(wallet=wallet)
+    expenses = Expense.objects.filter(wallet=wallet)
+
+    total_revenue = sum(revenue.amount for revenue in revenues)
+    total_expense = sum(expense.amount for expense in expenses)
+
+    fig, ax = plt.subplots()
+    labels = ['Revenues', 'Expenses']
+    values = [total_revenue, total_expense]
+
+    ax.bar(labels, values, color=['green', 'red'])
+    ax.set_ylabel('Amount', color='white')
+
+    fig.patch.set_facecolor('#1a1a1a')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    return HttpResponse(buf, content_type='image/png')
 class WalletListView(ListView):
     model = Wallet
     template_name = 'budget/wallet_list.html'
@@ -75,8 +105,8 @@ class WalletCreateView(LoginRequiredMixin, CreateView):
     template_name = 'budget/wallet_form.html'
 
     def form_valid(self, form):
-        self.object = form.save()  # Save the form to get the object with an ID
-        self.object.users.add(self.request.user)  # Add the user
+        self.object = form.save()
+        self.object.users.add(self.request.user)
         return HttpResponseRedirect(self.get_success_url())
 
 
