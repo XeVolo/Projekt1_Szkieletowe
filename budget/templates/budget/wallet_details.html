@@ -32,11 +32,22 @@
         <p style="margin-bottom: 20px">Total Revenue: {{ total_revenue }}</p>
         <p>Total Expense: {{ total_expense }}</p>
 
+    <h2>Create:</h2>
+    <div class="button-container">
+        <a href="{% url 'expenses_create' %}" class="create-button">Create Expense</a>
+        <a href="{% url 'revenues_create' %}" class="create-button">Create Revenue</a>
+    </div>
+
     <h2>Revenue and Expense Chart:</h2>
     <div style="text-align: center;">
         <img src="{% url 'wallet_bar_chart' pk=wallet.id %}" alt="Bar Chart" width="30%" height="30%">
         <img src="{% url 'wallet_line_chart' pk=wallet.id %}" alt="Line Chart" width="30%" height="30%">
     </div>
+    <div class="button-container">
+        <button onclick="history.go(-1);" class="back-button">Back</button>
+        <a href="{% url 'home' %}" class="home-button">Home</a>
+    </div>
+
 </body>
 <footer>
         Your Wallet Inc.
