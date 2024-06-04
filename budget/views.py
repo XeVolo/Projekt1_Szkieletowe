@@ -12,6 +12,9 @@ from .forms import ExpenseForm
 from .forms import RevenueForm
 import matplotlib.pyplot as plt
 import io, os
+from django.shortcuts import get_object_or_404
+import datetime
+import matplotlib.dates as mdates
 def welcome(request):
     return render(request, 'registration/welcomepage.html')
 
@@ -68,7 +71,7 @@ class WalletDetailsView(DetailView):
         context['total_revenue'] = total_revenue
         context['total_expense'] = total_expense
         return context
-def wallet_chart(request, pk):
+def wallet_bar_chart(request, pk):
     wallet = Wallet.objects.get(pk=pk)
     revenues = Revenue.objects.filter(wallet=wallet)
     expenses = Expense.objects.filter(wallet=wallet)
@@ -88,6 +91,72 @@ def wallet_chart(request, pk):
     ax.yaxis.label.set_color('white')
     ax.tick_params(axis='x', colors='white')
     ax.tick_params(axis='y', colors='white')
+
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    return HttpResponse(buf, content_type='image/png')
+def wallet_line_chart(request, pk):
+    wallet = get_object_or_404(Wallet, pk=pk)
+    revenues = Revenue.objects.filter(wallet=wallet).order_by('operation_date')
+    expenses = Expense.objects.filter(wallet=wallet).order_by('operation_date')
+
+    revenue_dates = [revenue.operation_date.strftime('%d-%m-%Y') for revenue in revenues]
+    revenue_amounts = [revenue.amount for revenue in revenues]
+
+    expense_dates = [expense.operation_date.strftime('%d-%m-%Y') for expense in expenses]
+    expense_amounts = [expense.amount for expense in expenses]
+
+    combined_data = []
+    for revenue in revenues:
+        revenue_date_formatted = revenue.operation_date.strftime('%d-%m-%Y')
+        combined_data.append({
+            "amount": revenue.amount,
+            "date": revenue_date_formatted,
+            "type": 0
+        })
+
+    for expense in expenses:
+        expense_date_formatted = expense.operation_date.strftime('%d-%m-%Y')
+        combined_data.append({
+            "amount": expense.amount,
+            "date": expense_date_formatted,
+            "type": 1
+        })
+
+    for item in combined_data:
+        item["date"] = datetime.datetime.strptime(item["date"], '%d-%m-%Y')
+
+    # Teraz posortuj dane po dacie
+    sorted_data = sorted(combined_data, key=lambda x: x["date"])
+
+    fig2, ax2 = plt.subplots()
+
+    types = [item["type"] for item in sorted_data]
+    revenue_indices = [i for i, t in enumerate(types) if t == 0]
+    expense_indices = [i for i, t in enumerate(types) if t == 1]
+
+    revenue_dates = [sorted_data[i]["date"] for i in revenue_indices]
+    revenue_amounts = [sorted_data[i]["amount"] for i in revenue_indices]
+    expense_dates = [sorted_data[i]["date"] for i in expense_indices]
+    expense_amounts = [sorted_data[i]["amount"] for i in expense_indices]
+
+    ax2.plot(expense_dates, expense_amounts, label='Expenses', color='red')
+    ax2.plot(revenue_dates, revenue_amounts, label='Revenues', color='green')
+
+    ax2.set_xlabel('Date', color='white')
+    ax2.set_ylabel('Amount', color='white')
+
+    ax2.legend(facecolor='#1a1a1a', edgecolor='white', labelcolor='white')
+
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d-%m-%Y'))
+    plt.gcf().autofmt_xdate()
+    fig2.patch.set_facecolor('#1a1a1a')
+    ax2.xaxis.label.set_color('white')
+    ax2.yaxis.label.set_color('white')
+    ax2.tick_params(axis='x', colors='white')
+    ax2.tick_params(axis='y', colors='white')
+    ax2.set_ylim(bottom=0)
 
     buf = io.BytesIO()
     plt.savefig(buf, format='png')

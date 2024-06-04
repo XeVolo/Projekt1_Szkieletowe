@@ -34,8 +34,9 @@
 
     <h2>Revenue and Expense Chart:</h2>
     <div style="text-align: center;">
-    <img src="{% url 'wallet_chart' pk=wallet.id %}" alt="Chart" width="33%" height="33%">
-</div>
+        <img src="{% url 'wallet_bar_chart' pk=wallet.id %}" alt="Bar Chart" width="30%" height="30%">
+        <img src="{% url 'wallet_line_chart' pk=wallet.id %}" alt="Line Chart" width="30%" height="30%">
+    </div>
 </body>
 <footer>
         Your Wallet Inc.
