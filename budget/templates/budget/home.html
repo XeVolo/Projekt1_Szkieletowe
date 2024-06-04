@@ -6,9 +6,6 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/homestyle.css' %}">
     <title>Your Wallet</title>
-</head>
-<body>
-    <h1>Your Wallet</h1>
     <div class="user-info-container">
         <div class="user-info">
             <p>Logged in as: {{ request.user.username }}</p>
@@ -18,6 +15,10 @@
             </form>
         </div>
     </div>
+</head>
+<body>
+    <h1>Your Wallet</h1>
+
     <nav>
         <ul>
         <li><a href="{% url 'wallet_list' %}">Wallet List</a></li>

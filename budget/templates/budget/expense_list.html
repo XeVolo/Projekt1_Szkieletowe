@@ -6,14 +6,28 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/liststyle.css' %}">
     <title>Expenses List</title>
+    <div class="user-info-container">
+        <div class="user-info">
+            <p>Logged in as: {{ request.user.username }}</p>
+            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">Logout</button>
+            </form>
+        </div>
+    </div>
 </head>
 <body>
     <h1>Expenses List</h1>
+
     <ul>
         {% for expense in object_list %}
             <li>{{ expense.title }} - Amount: {{ expense.amount }}</li>
         {% endfor %}
     </ul>
+    <div class="button-container">
+        <button onclick="history.go(-1);" class="back-button">Back</button>
+        <a href="{% url 'home' %}" class="home-button">Home</a>
+    </div>
 </body>
 <footer>
         <p>Your Wallet Inc.</p>

@@ -3,6 +3,7 @@ from .models import Expense, Category, Revenue
 
 
 class ExpenseForm(forms.ModelForm):
+    operation_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None, to_field_name="name")
 
     class Meta:
@@ -31,6 +32,7 @@ class ExpenseForm(forms.ModelForm):
 
 
 class RevenueForm(forms.ModelForm):
+    operation_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None, to_field_name="name")
 
     class Meta:
