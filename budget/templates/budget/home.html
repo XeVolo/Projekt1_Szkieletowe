@@ -9,7 +9,15 @@
 </head>
 <body>
     <h1>Your Wallet</h1>
-    <p id="user-info">Logged in as: {{ request.user.username }} (<a href="{% url 'logout' %}">Logout</a>)</p>
+    <div class="user-info-container">
+        <div class="user-info">
+            <p>Logged in as: {{ request.user.username }}</p>
+            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">Logout</button>
+            </form>
+        </div>
+    </div>
     <nav>
         <ul>
         <li><a href="{% url 'wallet_list' %}">Wallet List</a></li>
