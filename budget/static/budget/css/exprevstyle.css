@@ -32,6 +32,11 @@ form select {
     border-radius: 5px; /* Zaokrąglenie rogów */
 }
 
+form.custom-form {
+    background-color: #1a1a1a;
+    /* Dodaj tutaj stylowanie dla formularza */
+}
+
 /* Ustawiamy wszystkie listy wyboru w jednej linii */
 form select {
     display: inline-block;
@@ -91,7 +96,7 @@ footer {
     margin-top: 20px;
 }
 
-.home-button {
+home-button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -100,11 +105,11 @@ footer {
     transition: background-color 0.3s ease;
 }
 
-.home-button:hover {
+home-button:hover {
     background-color: #45a049;
 }
 
-.back-button {
+back-button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -115,16 +120,16 @@ footer {
     margin-right: 10px; /* Dodatkowy margines na prawo, aby oddzielić przycisk "Back" od przycisku "Home" */
 }
 
-.back-button:hover {
+back-button:hover {
     background-color: #45a049;
 }
 
-.button-container {
+button-container {
     text-align: center; /* Wyśrodkowanie zawartości w poziomie */
     margin-top: 20px; /* Dodatkowy margines na górze dla odstępu od listy portfeli */
 }
 
-.logout-button {
+logout-button {
     background-color: #4CAF50; /* Zmienia kolor tła */
     color: white; /* Zmienia kolor tekstu */
     padding: 10px 20px; /* Zmienia rozmiar przycisku */
@@ -134,45 +139,24 @@ footer {
     border-radius: 5px;
 }
 
-.logout-button:hover {
+logout-button:hover {
     background-color: #45a049; /* Kolor tła przy najechaniu kursorem */
 }
 
-.user-info {
+user-info {
     display: flex;
     align-items: center;
     color: white;
     font-size: 17px;
 }
 
-.user-info p {
+user-info p {
     margin-right: 10px;
     color: white;
 }
 
-.user-info-container {
+user-info-container {
     display: flex;
     justify-content: flex-end; /* Ustawia elementy na końcu w prawej stronie */
     margin-right: 50px;
-}
-
-#logout-form {
-    display: inline;
-    padding: 0;
-    background-color: transparent; /* domyślne tło */
-    border: none; /* brak obramowania */
-}
-
-#logout-form button {
-    background-color: #4CAF50; /* kolor tła przycisku */
-    color: white; /* kolor tekstu */
-    padding: 10px 20px; /* wewnętrzny odstęp */
-    font-size: 16px; /* rozmiar czcionki */
-    border: none; /* brak obramowania */
-    cursor: pointer; /* kursor wskaźnik */
-    border-radius: 5px;
-}
-
-#logout-form button:hover {
-    background-color: #45a049; /* kolor tła przycisku po najechaniu */
 }

@@ -6,6 +6,15 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/walletstyle.css' %}">
     <title>{% if form.instance.pk %}Edit Wallet{% else %}Create Wallet{% endif %}</title>
+    <div class="user-info-container">
+        <div class="user-info">
+            <p>Logged in as: {{ request.user.username }}</p>
+            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">Logout</button>
+            </form>
+        </div>
+    </div>
 </head>
 <body>
     <h1>{% if form.instance.pk %}Edit Wallet{% else %}Create Wallet{% endif %}</h1>
@@ -15,7 +24,7 @@
         <button type="submit">Save</button>
     </form>
     <div class="button-container">
-        <button onclick="history.go(-1);" class="back-button">Back</button>
+        <a href="javascript:history.go(-1);" class="home-button">Back</a>
         <a href="{% url 'home' %}" class="home-button">Home</a>
     </div>
 </body>

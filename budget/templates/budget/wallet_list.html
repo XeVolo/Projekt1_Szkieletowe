@@ -26,7 +26,7 @@
         {% endfor %}
     </ul>
     <div class="button-container">
-        <button onclick="history.go(-1);" class="back-button">Back</button>
+        <a href="javascript:history.go(-1);" class="home-button">Back</a>
         <a href="{% url 'home' %}" class="home-button">Home</a>
     </div>
 </body>

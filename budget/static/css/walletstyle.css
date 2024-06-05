@@ -100,3 +100,56 @@ footer {
     text-align: center; /* Wyśrodkowanie zawartości w poziomie */
     margin-top: 20px; /* Dodatkowy margines na górze dla odstępu od listy portfeli */
 }
+
+.logout-button {
+    background-color: #4CAF50; /* Zmienia kolor tła */
+    color: white; /* Zmienia kolor tekstu */
+    padding: 10px 20px; /* Zmienia rozmiar przycisku */
+    font-size: 16px; /* Zmienia rozmiar czcionki */
+    border: none; /* Usuwa obramowanie */
+    cursor: pointer; /* Dodaje kursor wskazujący na możliwość kliknięcia */
+    border-radius: 5px;
+}
+
+.logout-button:hover {
+    background-color: #45a049; /* Kolor tła przy najechaniu kursorem */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 17px;
+}
+
+.user-info p {
+    margin-right: 10px;
+    color: white;
+}
+
+.user-info-container {
+    display: flex;
+    justify-content: flex-end; /* Ustawia elementy na końcu w prawej stronie */
+    margin-right: 50px;
+}
+
+#logout-form {
+    display: inline;
+    padding: 0;
+    background-color: transparent; /* domyślne tło */
+    border: none; /* brak obramowania */
+}
+
+#logout-form button {
+    background-color: #4CAF50; /* kolor tła przycisku */
+    color: white; /* kolor tekstu */
+    padding: 10px 20px; /* wewnętrzny odstęp */
+    font-size: 16px; /* rozmiar czcionki */
+    border: none; /* brak obramowania */
+    cursor: pointer; /* kursor wskaźnik */
+    border-radius: 5px;
+}
+
+#logout-form button:hover {
+    background-color: #45a049; /* kolor tła przycisku po najechaniu */
+}
