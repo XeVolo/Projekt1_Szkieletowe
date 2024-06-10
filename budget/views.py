@@ -162,9 +162,25 @@ def wallet_line_chart(request, pk):
     plt.savefig(buf, format='png')
     buf.seek(0)
     return HttpResponse(buf, content_type='image/png')
-class WalletListView(ListView):
+class WalletListView(LoginRequiredMixin, ListView):
     model = Wallet
     template_name = 'budget/wallet_list.html'
+    context_object_name = 'wallets'
+
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering', 'description')
+        direction = self.request.GET.get('direction', 'asc')
+        if direction == 'desc':
+            ordering = f'-{ordering}'
+        return ordering
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(users=self.request.user)  # Filtruj portfele tylko dla zalogowanego użytkownika
+        ordering = self.get_ordering()
+        if ordering:
+            queryset = queryset.order_by(ordering)
+        return queryset
 
 
 class WalletCreateView(LoginRequiredMixin, CreateView):
@@ -195,6 +211,23 @@ class WalletDeleteView(DeleteView):
 class ExpenseListView(ListView):
     model = Expense
     template_name = 'budget/expense_list.html'
+    context_object_name = 'expenses'
+
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering', 'title')
+        direction = self.request.GET.get('direction', 'asc')
+        if direction == 'desc':
+            ordering = f'-{ordering}'
+        return ordering
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        ordering = self.get_ordering()
+        if ordering:
+            queryset = queryset.order_by(ordering)
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+
 
 
 class ExpenseCreateView(LoginRequiredMixin, CreateView):
@@ -229,7 +262,22 @@ class ExpenseDeleteView(DeleteView):
 class RevenueListView(ListView):
     model = Revenue
     template_name = 'budget/revenue_list.html'
+    context_object_name = 'revenues'
 
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering', 'title')
+        direction = self.request.GET.get('direction', 'asc')
+        if direction == 'desc':
+            ordering = f'-{ordering}'
+        return ordering
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        ordering = self.get_ordering()
+        if ordering:
+            queryset = queryset.order_by(ordering)
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
 
 class RevenueCreateView(LoginRequiredMixin, CreateView):
     model = Revenue
@@ -263,7 +311,21 @@ class RevenueDeleteView(DeleteView):
 class CategoryListView(ListView):
     model = Category
     template_name = 'budget/category_list.html'
+    context_object_name = 'categories'
 
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering', 'name')
+        direction = self.request.GET.get('direction', 'asc')
+        if direction == 'desc':
+            ordering = f'-{ordering}'
+        return ordering
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        ordering = self.get_ordering()
+        if ordering:
+            queryset = queryset.order_by(ordering)
+        return queryset
 
 class CategoryCreateView(CreateView):
     model = Category

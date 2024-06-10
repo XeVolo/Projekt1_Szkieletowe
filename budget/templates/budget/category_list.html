@@ -18,6 +18,14 @@
 </head>
 <body>
     <h1>Category List</h1>
+    <div class="sort-options">
+        <span>Sort by: </span>
+        <select id="sort-select">
+            <option value="name-asc">Name A-Z</option>
+            <option value="name-desc">Name Z-A</option>
+        </select>
+    </div>
+    <br>
     <ul>
         {% for category in object_list %}
             <li>{{ category.name }}</li>
@@ -27,6 +35,17 @@
         <a href="javascript:history.go(-1);" class="home-button">Back</a>
         <a href="{% url 'home' %}" class="home-button">Home</a>
     </div>
+    <script>
+        document.getElementById('sort-select').addEventListener('change', function() {
+            var selectedOption = this.value;
+            var baseUrl = window.location.href.split('?')[0];
+            var queryParams = selectedOption.split('-');
+            var ordering = queryParams[0];
+            var direction = queryParams[1];
+            var newUrl = baseUrl + '?ordering=' + ordering + '&direction=' + direction;
+            window.location.href = newUrl;
+        });
+    </script>
 </body>
 <footer>
         <p>Your Wallet Inc.</p>

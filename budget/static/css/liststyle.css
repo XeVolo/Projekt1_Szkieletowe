@@ -105,3 +105,13 @@ footer {
 .back-button:hover {
     background-color: #45a049;
 }
+
+.sort-options {
+    text-align: center; /* Wyśrodkowanie tekstu w poziomie */
+    color: white;
+    left: 50%;
+}
+
+#sort-select {
+    width: 200px; /* Szerokość rozwijanej listy */
+}

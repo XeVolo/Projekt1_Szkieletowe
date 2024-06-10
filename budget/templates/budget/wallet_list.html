@@ -18,8 +18,18 @@
 </head>
 <body>
     <h1>Wallet List</h1>
+    <div class="sort-options">
+        <span>Sort by: </span>
+        <select id="sort-select">
+            <option value="description-asc">Description Ascending</option>
+            <option value="description-desc">Description Descending</option>
+            <option value="balance-asc">Balance Ascending</option>
+            <option value="balance-desc">Balance Descending</option>
+        </select>
+    </div>
+    <br>
     <ul>
-        {% for wallet in user.wallets.all %}
+        {% for wallet in wallets %}
             <li><a href="{% url 'wallet_details' wallet.id %}" class="wallet-button">{{ wallet.description }} - Balance: {{ wallet.balance }}</a></li>
         {% empty %}
             <li>No wallets found for this user</li>
@@ -29,8 +39,20 @@
         <a href="javascript:history.go(-1);" class="home-button">Back</a>
         <a href="{% url 'home' %}" class="home-button">Home</a>
     </div>
+
+    <script>
+        document.getElementById('sort-select').addEventListener('change', function() {
+            var selectedOption = this.value;
+            var baseUrl = window.location.href.split('?')[0];
+            var queryParams = selectedOption.split('-');
+            var ordering = queryParams[0];
+            var direction = queryParams[1];
+            var newUrl = baseUrl + '?ordering=' + ordering + '&direction=' + direction;
+            window.location.href = newUrl;
+        });
+    </script>
 </body>
 <footer>
-        <p>Your Wallet Inc.</p>
+    <p>Your Wallet Inc.</p>
 </footer>
 </html>
