@@ -20,8 +20,8 @@ h1 {
     margin-top: 10px;
 }
 div {
-    justify-content: center; /* Wyśrodkowanie w poziomie */
-    align-items: center; /* Wyśrodkowanie w pionie */
+    justify-content: center;
+    align-items: center;
 }
 nav {
     display: flex;

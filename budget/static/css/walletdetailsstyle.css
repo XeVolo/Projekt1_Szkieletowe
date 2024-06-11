@@ -51,8 +51,8 @@ footer {
 }
 
 .button-container {
-    text-align: center; /* Wyśrodkowanie zawartości w poziomie */
-    margin-top: 20px; /* Dodatkowy margines na górze dla odstępu od listy portfeli */
+    text-align: center;
+    margin-top: 20px;
 }
 
 .create-button {
@@ -89,7 +89,7 @@ footer {
     font-size: 15px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-    margin-right: 10px; /* Dodatkowy margines na prawo, aby oddzielić przycisk "Back" od przycisku "Home" */
+    margin-right: 10px;
 }
 
 .back-button:hover {
@@ -97,6 +97,6 @@ footer {
 }
 
 .button-container {
-    text-align: center; /* Wyśrodkowanie zawartości w poziomie */
-    margin-top: 20px; /* Dodatkowy margines na górze dla odstępu od listy portfeli */
+    text-align: center;
+    margin-top: 20px;
 }

@@ -61,17 +61,17 @@ footer {
 }
 
 .logout-button {
-    background-color: #4CAF50; /* Zmienia kolor tła */
-    color: white; /* Zmienia kolor tekstu */
-    padding: 10px 20px; /* Zmienia rozmiar przycisku */
-    font-size: 16px; /* Zmienia rozmiar czcionki */
-    border: none; /* Usuwa obramowanie */
-    cursor: pointer; /* Dodaje kursor wskazujący na możliwość kliknięcia */
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
     border-radius: 5px;
 }
 
 .logout-button:hover {
-    background-color: #45a049; /* Kolor tła przy najechaniu kursorem */
+    background-color: #45a049;
 }
 
 .user-info {
@@ -88,6 +88,6 @@ footer {
 
 .user-info-container {
     display: flex;
-    justify-content: flex-end; /* Ustawia elementy na końcu w prawej stronie */
+    justify-content: flex-end;
     margin-right: 50px;
 }

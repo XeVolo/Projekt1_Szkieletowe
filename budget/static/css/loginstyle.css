@@ -16,7 +16,7 @@ h2 {
 
 form {
     margin: 0 auto;
-    max-width: 400px; /* Ustaw maksymalną szerokość formularza */
+    max-width: 400px;
     padding: 20px;
     background-color: #333;
     border-radius: 5px;
@@ -24,13 +24,13 @@ form {
 
 form input[type="text"],
 form input[type="password"] {
-    width: calc(100% - 24px); /* Szerokość */
-    padding: 10px; /* Wewnętrzny odstęp */
-    margin: 5px 0; /* Marginesy */
-    border: none; /* Brak obramowania */
-    background-color: #ddd; /* Kolor tła - lekko jaśniejszy niż tło */
-    border-radius: 5px; /* Zaokrąglenie rogów */
-    color: #333; /* Kolor tekstu */
+    width: calc(100% - 24px);
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    background-color: #ddd;
+    border-radius: 5px;
+    color: #333;
 }
 
 form button[type="submit"] {

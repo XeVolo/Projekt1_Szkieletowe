@@ -42,17 +42,17 @@ footer {
 }
 
 .logout-button {
-    background-color: #4CAF50; /* Zmienia kolor tła */
-    color: white; /* Zmienia kolor tekstu */
-    padding: 10px 20px; /* Zmienia rozmiar przycisku */
-    font-size: 16px; /* Zmienia rozmiar czcionki */
-    border: none; /* Usuwa obramowanie */
-    cursor: pointer; /* Dodaje kursor wskazujący na możliwość kliknięcia */
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
     border-radius: 5px;
 }
 
 .logout-button:hover {
-    background-color: #45a049; /* Kolor tła przy najechaniu kursorem */
+    background-color: #45a049;
 }
 
 .user-info {
@@ -69,13 +69,13 @@ footer {
 
 .user-info-container {
     display: flex;
-    justify-content: flex-end; /* Ustawia elementy na końcu w prawej stronie */
+    justify-content: flex-end;
     margin-right: 50px;
 }
 
 .button-container {
-    text-align: center; /* Wyśrodkowanie zawartości w poziomie */
-    margin-top: 20px; /* Dodatkowy margines na górze dla odstępu od listy portfeli */
+    text-align: center;
+    margin-top: 20px;
 }
 
 .home-button {
@@ -99,7 +99,7 @@ footer {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-    margin-right: 10px; /* Dodatkowy margines na prawo, aby oddzielić przycisk "Back" od przycisku "Home" */
+    margin-right: 10px;
 }
 
 .back-button:hover {
@@ -107,11 +107,11 @@ footer {
 }
 
 .sort-options {
-    text-align: center; /* Wyśrodkowanie tekstu w poziomie */
+    text-align: center;
     color: white;
     left: 50%;
 }
 
 #sort-select {
-    width: 200px; /* Szerokość rozwijanej listy */
+    width: 200px;
 }

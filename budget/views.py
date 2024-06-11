@@ -15,14 +15,17 @@ import io, os
 from django.shortcuts import get_object_or_404
 import datetime
 import matplotlib.dates as mdates
+
+
+#strona powitalna
 def welcome(request):
     return render(request, 'registration/welcomepage.html')
 
-
+#główny widok aplikacji
 def home(request):
     return render(request, 'budget/home.html')
 
-
+#rejestracja
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -34,7 +37,7 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
-
+#logowanie
 def user_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
@@ -46,11 +49,12 @@ def user_login(request):
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
 
-
+#wylogowywanie
 def user_logout(request):
     logout(request)
     return redirect('welcome')
 
+#Widok portfela
 class WalletDetailsView(DetailView):
     model = Wallet
     template_name = 'wallet_details.html'
@@ -71,6 +75,8 @@ class WalletDetailsView(DetailView):
         context['total_revenue'] = total_revenue
         context['total_expense'] = total_expense
         return context
+
+#generowanie wykresu słupkowego
 def wallet_bar_chart(request, pk):
     wallet = Wallet.objects.get(pk=pk)
     revenues = Revenue.objects.filter(wallet=wallet)
@@ -96,6 +102,8 @@ def wallet_bar_chart(request, pk):
     plt.savefig(buf, format='png')
     buf.seek(0)
     return HttpResponse(buf, content_type='image/png')
+
+#generowanie wykresu liniowego
 def wallet_line_chart(request, pk):
     wallet = get_object_or_404(Wallet, pk=pk)
     revenues = Revenue.objects.filter(wallet=wallet).order_by('operation_date')
@@ -127,7 +135,6 @@ def wallet_line_chart(request, pk):
     for item in combined_data:
         item["date"] = datetime.datetime.strptime(item["date"], '%d-%m-%Y')
 
-    # Teraz posortuj dane po dacie
     sorted_data = sorted(combined_data, key=lambda x: x["date"])
 
     fig2, ax2 = plt.subplots()
@@ -142,7 +149,9 @@ def wallet_line_chart(request, pk):
     expense_amounts = [sorted_data[i]["amount"] for i in expense_indices]
 
     ax2.plot(expense_dates, expense_amounts, label='Expenses', color='red')
+    ax2.scatter(expense_dates, expense_amounts, label='Expenses', color='red')
     ax2.plot(revenue_dates, revenue_amounts, label='Revenues', color='green')
+    ax2.scatter(revenue_dates, revenue_amounts, label='Revenues', color='green')
 
     ax2.set_xlabel('Date', color='white')
     ax2.set_ylabel('Amount', color='white')
@@ -162,6 +171,8 @@ def wallet_line_chart(request, pk):
     plt.savefig(buf, format='png')
     buf.seek(0)
     return HttpResponse(buf, content_type='image/png')
+
+#Widok listy portfeli
 class WalletListView(LoginRequiredMixin, ListView):
     model = Wallet
     template_name = 'budget/wallet_list.html'
@@ -183,6 +194,7 @@ class WalletListView(LoginRequiredMixin, ListView):
         return queryset
 
 
+#tworzenie nowego portfela
 class WalletCreateView(LoginRequiredMixin, CreateView):
     model = Wallet
     fields = ['balance', 'description']
@@ -195,19 +207,20 @@ class WalletCreateView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
+#Edytowanie portfela
 class WalletUpdateView(UpdateView):
     model = Wallet
     fields = ['balance', 'description']
     success_url = reverse_lazy('wallet_list')
     template_name = 'budget/wallet_form.html'
 
-
+#Usuwanie portfela
 class WalletDeleteView(DeleteView):
     model = Wallet
     success_url = reverse_lazy('wallet_list')
     template_name = 'budget/wallet_confirm_delete.html'
 
-
+#Tworzenie wydatków - lista
 class ExpenseListView(ListView):
     model = Expense
     template_name = 'budget/expense_list.html'
@@ -229,7 +242,7 @@ class ExpenseListView(ListView):
         return queryset
 
 
-
+#Widok tworzenia wydatków
 class ExpenseCreateView(LoginRequiredMixin, CreateView):
     model = Expense
     form_class = ExpenseForm
@@ -245,20 +258,20 @@ class ExpenseCreateView(LoginRequiredMixin, CreateView):
         kwargs['user'] = self.request.user
         return kwargs
 
-
+#Edytowanie wydatków
 class ExpenseUpdateView(UpdateView):
     model = Expense
     fields = ['user', 'wallet', 'title', 'operation_date', 'amount', 'category', 'description']
     success_url = reverse_lazy('expense_list')
     template_name = 'budget/expense_form.html'
 
-
+#Usuwanie wydatków
 class ExpenseDeleteView(DeleteView):
     model = Expense
     success_url = reverse_lazy('expense_list')
     template_name = 'budget/expense_confirm_delete.html'
 
-
+#Widok przychodów - lista
 class RevenueListView(ListView):
     model = Revenue
     template_name = 'budget/revenue_list.html'
@@ -279,6 +292,7 @@ class RevenueListView(ListView):
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
+#Widok dodawnia przychodów
 class RevenueCreateView(LoginRequiredMixin, CreateView):
     model = Revenue
     form_class = RevenueForm
@@ -294,20 +308,20 @@ class RevenueCreateView(LoginRequiredMixin, CreateView):
         kwargs['user'] = self.request.user
         return kwargs
 
-
+#Edytowanie dodanych przychodów
 class RevenueUpdateView(UpdateView):
     model = Revenue
     fields = ['user', 'wallet', 'title', 'operation_date', 'amount', 'category', 'description']
     success_url = reverse_lazy('revenues_list')
     template_name = 'budget/revenue_form.html'
 
-
+#Usuwanie przychodów
 class RevenueDeleteView(DeleteView):
     model = Revenue
     success_url = reverse_lazy('revenue_list')
     template_name = 'budget/revenue_confirm_delete.html'
 
-
+#Lista dodanych kategorii
 class CategoryListView(ListView):
     model = Category
     template_name = 'budget/category_list.html'
@@ -327,20 +341,21 @@ class CategoryListView(ListView):
             queryset = queryset.order_by(ordering)
         return queryset
 
+#widok do tworzenia nowych kategorii
 class CategoryCreateView(CreateView):
     model = Category
     fields = ['name']
     success_url = reverse_lazy('category_list')
     template_name = 'budget/category_form.html'
 
-
+#Widok edytowania kategorii
 class CategoryUpdateView(UpdateView):
     model = Category
     fields = ['name']
     success_url = reverse_lazy('category_list')
     template_name = 'budget/category_form.html'
 
-
+#Usuwanie kategorii
 class CategoryDeleteView(DeleteView):
     model = Category
     success_url = reverse_lazy('category_list')

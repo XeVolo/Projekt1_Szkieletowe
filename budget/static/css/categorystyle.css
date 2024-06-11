@@ -30,17 +30,17 @@ form {
 form input[type="text"],
 form textarea,
 form select {
-    width: calc(100% - 24px); /* Szerokość */
-    padding: 10px; /* Wewnętrzny odstęp */
-    margin: 5px 0; /* Marginesy */
-    border: none; /* Brak obramowania */
-    background-color: #ddd; /* Kolor tła - lekko jaśniejszy niż tło */
-    border-radius: 5px; /* Zaokrąglenie rogów */
-    color: #333; /* Kolor tekstu */
+    width: calc(100% - 24px);
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    background-color: #ddd;
+    border-radius: 5px;
+    color: #333;
 }
 
 form textarea {
-    height: 150px; /* Wysokość pola tekstowego */
+    height: 150px;
 }
 
 form button[type="submit"] {
@@ -88,7 +88,7 @@ footer {
     font-size: 15px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-    margin-right: 10px; /* Dodatkowy margines na prawo, aby oddzielić przycisk "Back" od przycisku "Home" */
+    margin-right: 10px;
 }
 
 .back-button:hover {
@@ -96,8 +96,8 @@ footer {
 }
 
 .button-container {
-    text-align: center; /* Wyśrodkowanie zawartości w poziomie */
-    margin-top: 20px; /* Dodatkowy margines na górze dla odstępu od listy portfeli */
+    text-align: center;
+    margin-top: 20px;
 }
 
 .user-info {
@@ -114,27 +114,27 @@ footer {
 
 .user-info-container {
     display: flex;
-    justify-content: flex-end; /* Ustawia elementy na końcu w prawej stronie */
+    justify-content: flex-end;
     margin-right: 50px;
 }
 
 #logout-form {
     display: inline;
     padding: 0;
-    background-color: transparent; /* domyślne tło */
-    border: none; /* brak obramowania */
+    background-color: transparent;
+    border: none;
 }
 
 #logout-form button {
-    background-color: #4CAF50; /* kolor tła przycisku */
-    color: white; /* kolor tekstu */
-    padding: 10px 20px; /* wewnętrzny odstęp */
-    font-size: 16px; /* rozmiar czcionki */
-    border: none; /* brak obramowania */
-    cursor: pointer; /* kursor wskaźnik */
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
     border-radius: 5px;
 }
 
 #logout-form button:hover {
-    background-color: #45a049; /* kolor tła przycisku po najechaniu */
+    background-color: #45a049;
 }
